@@ -1,2 +1,2 @@
 # wheeloftimeline
-Visualizing the POV changes in Robert Jordan's Wheel of Time Series
+Visualizing the POV changes in Robert Jordan's "The Wheel of Time" book series.
