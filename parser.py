@@ -1,6 +1,7 @@
 # HTML Parser
 # Author: Suzie Hoops
-# Last Updated: August 7, 2018
+# Last Updated: August 21, 2018
+# Usage: python parser.py
 
 # Documentation
 
@@ -29,6 +30,8 @@ from contextlib import closing
 from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 import numpy as np
+from numpy.ma import masked_array
+
 
 
 ######## GET Request of Web Page ################
@@ -50,7 +53,6 @@ def simple_get(url):
 		log_error('Error during requests to {0} : {1}'.format(url, str(e)))
 		return None
 
-
 # Helper Function - Check response is present and HTML content
 def is_good_response(resp):
 	"""
@@ -61,7 +63,6 @@ def is_good_response(resp):
 			and content_type is not None
 			and content_type.find('html') > -1)
 
-
 # Helper Function - Log Errors as they occur
 def log_error(e):
 	"""
@@ -70,18 +71,16 @@ def log_error(e):
 	"""
 	print(e)
 
-
 # Helper Function - Check for Rowspan
-def is_rowspan(row):
+def is_rowspan(row, table):
 	"""
 	Returns true if row contains a rowspan, false otherwise. We know
 	all rowspans occur in the first column for these tables.
 	"""
 	# returning length less than 4 indicates rowspan
-	if len(row) < 3:
+	if len(row) < 4:
 		return True
 	return False
-
 
 # Function - Get Table Info
 def get_tables():
@@ -99,7 +98,7 @@ def get_tables():
 		# Tables found in <table class="wikitable"> (headers included)
 		wikitables = html.find_all(lambda tag: tag.name == 'table' and
 											   tag.get('class') == ['wikitable'])
-		print(str(len(wikitables)))
+		wikitables = wikitables[:-1] #remove last table - not complete on site
 		# Parse tables
 		out = []  # return element form: [['book_num', 'charcter_name', 'length']]
 		book_num = 0
@@ -108,34 +107,27 @@ def get_tables():
 			for row in table.find_all('tr'):
 				# strip cell contents
 				row = [td.get_text().strip() for td in row.find_all('td')]
+				# check contents, skip headers
 				if len(row) <= 0:
 					continue
-				if is_rowspan(row):
-					curr_val = float(row[-1].strip('%')) # convert to float, no divide by 100
-					out.append([book_num, row[0], row[-1]])
-				else:
-					curr_val = float(row[-1].strip('%')) # convert to float, no divide by 100
-					out.append([book_num, row[1], row[-1]])
-				prev_val += curr_val # iterate every loop of rows in this table
+				if 'Percentage' not in row[-1]:
+					if is_rowspan(row, book_num):
+						curr_val = float(row[-1].strip('%')) # convert to float, no divide by 100
+						out.append([book_num, row[0], curr_val])
+					else:
+						curr_val = float(row[-1].strip('%')) # convert to float, no divide by 100
+						out.append([book_num, row[1], curr_val])
+					prev_val += curr_val # iterate every loop of rows in this table
 			book_num += 1 # iterate every loop of tables
 		return out
 	# Raise an exception if we failed to get any data from the url
 	raise Exception('Error retrieving contents at {}'.format(url))
 
 
-######## Create Visualization ###################
-def plot(array):
-	"""
-	Using MatPlot, create a pop up window containing a plot
-	of POV information collected on all 15 books.
-	Array format: [['book_num', 'charcter_name', 'start', 'end']]
-	"""
-	# Set up y axis according to book category
-	y_pos = nparange(15) #based on number of books
-	# List of 
-	plt.barh()
-
 
 ######## Main Function ##########################
-
 arr = get_tables()
+chars = [item[1] for item in arr]
+col_dict = make_dict(chars)
+colors = prepare_data(arr,col_dict)
+plot(colors)
