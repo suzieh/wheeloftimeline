@@ -1,7 +1,13 @@
-# HTML Parser
-# Author: Suzie Hoops
+# Plotting in a Grid
+# Author: Suzie Hoops (suzieh)
 # Last Updated: August 21, 2018
 # Usage: pythonw gridplot.py
+
+######## Install Dependencies ###################
+import matplotlib.pyplot as plt
+import numpy as np
+
+
 ######## Create Colors Dictionary ###############
 def make_dict(char_list):
 	"""

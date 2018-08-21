@@ -1,5 +1,5 @@
 # HTML Parser
-# Author: Suzie Hoops
+# Author: Suzie Hoops (suzieh)
 # Last Updated: August 21, 2018
 # Usage: python parser.py
 
@@ -28,10 +28,6 @@ from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
-import matplotlib.pyplot as plt
-import numpy as np
-from numpy.ma import masked_array
-
 
 
 ######## GET Request of Web Page ################
@@ -122,7 +118,6 @@ def get_tables():
 		return out
 	# Raise an exception if we failed to get any data from the url
 	raise Exception('Error retrieving contents at {}'.format(url))
-
 
 
 ######## Main Function ##########################
