@@ -6,23 +6,27 @@
 
 # Documentation
 
-# Virtual Environment suggested (put this in README)
-# be sure to pip install venv, numpy, requests, bs4, matplotlib
+# Purpose
+#### This script contains functions for scraping data from a
+####   web resource using the BeautifulSoup library.
+#### This script was uniquely created for use on the wheeloftime
+####   data. Not recommended for general use.
 
-# HTML Tables Format
-#    <table class="wikitable">
-#      <tbody>
-#      <tr> <th>Chapter</th> <th>Character</th> <th>Word Count</th> <th> Percentage </th> </tr>
-#      <tr> <td> <a href="..." title="New Spring/Chapter 1">Ch1: The Hook</a> </td>
-#           <td> <a href="..." title="Siuan Sanche" class="mw-redirect">Siuan Sanche</a> </td>
-#           <td style="text-align: right;"> 5,677 </td>
-#           <td style="text-align: right;"> 4.6589% </td>
-#      </tr>
-#      ... continues for each chapter of current book (New Spring in this example) ...
-#      </tbody>
-#    </table>
-#   * Note: other tables hold useless info, of a different table class:
-#           <table class="wikitable sortable jquery-tablesorter"> ... </table>
+# Parsing HTML Tables for Data
+#### HTML Tables Format on Site
+####    <table class="wikitable">
+####      <tbody>
+####      <tr> <th>Chapter</th> <th>Character</th> <th>Word Count</th> <th> Percentage </th> </tr>
+####      <tr> <td> <a href="..." title="New Spring/Chapter 1">Ch1: The Hook</a> </td>
+####           <td> <a href="..." title="Siuan Sanche" class="mw-redirect">Siuan Sanche</a> </td>
+####           <td style="text-align: right;"> 5,677 </td>
+####           <td style="text-align: right;"> 4.6589% </td>
+####      </tr>
+####      ... continues for each chapter of current book (New Spring in this example) ...
+####      </tbody>
+####    </table>
+####   * Note: other tables hold useless info, of a different table class:
+####           <table class="wikitable sortable jquery-tablesorter"> ... </table>
 
 ######## Install Dependencies ###################
 from requests import get

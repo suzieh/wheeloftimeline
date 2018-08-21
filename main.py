@@ -4,6 +4,16 @@
 # Usage: pythonw main.py
 #!/usr/bin/env python
 
+# Documentation
+
+# Purpose
+#### This file servers as the main executable, drawing on
+####   functions written in the parser.py and gridplot.py
+####   files for running the full script.
+#### This script was uniquely created for use with the
+####   aforementioned wheeloftimeline scripts. It is not
+####   recommended for general use.
+
 ######## Install Dependencies ###################
 import parser
 import gridplot

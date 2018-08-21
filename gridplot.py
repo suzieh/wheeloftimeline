@@ -4,6 +4,25 @@
 # Usage: pythonw gridplot.py
 #!/usr/bin/env python
 
+# Documentation
+
+# Purpose
+#### This file makes the data obtained from parser.py usable for
+####   the matplot library. It then contains functions for plotting
+####   the output in a separate window.
+#### This script was uniquely created for use on the wheeloftime
+####   data. Not recommended for general use.
+
+# Grid Dimensions
+#### We know we have 14 chapters of data as collected from the site.
+#### We want to use the provided data to make a "heatmap" of
+####   sorts showing the locations of certain points of view. To do
+####   so, we want a grid of length 200, each row representing one of
+####   the 14 books, and fill it with the duration of the book in which
+####   each character has the point of view (POV).
+#### Note that some POVs will be overlooked in the graph as they were
+####   for such a short duration, it seemed obsolete to include them.
+
 ######## Install Dependencies ###################
 import matplotlib.pyplot as plt
 import numpy as np
@@ -33,7 +52,7 @@ def prepare_data(array, col_dict):
 	Prepare two matrices of same size, one containing the word
 	count data, the other the corresponding colors.
 	"""
-	# Create an array to be used in a 100 x 100 grid (first and last row are zeros)
+	# Create an array to be used in a 100 x 200 grid (first and last row are zeros)
 	data = np.zeros(20000, dtype=float) # stores colors
 	# Append data to data array, repeating character names to show length of POV
 	book_num = 0 # track book
