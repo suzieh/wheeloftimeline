@@ -1,4 +1,4 @@
-# Plotting in a Grid
+# Grid Plot
 # Author: Suzie Hoops (suzieh)
 # Last Updated: August 21, 2018
 # Usage: pythonw gridplot.py
@@ -90,12 +90,21 @@ def plot(colors):
 	of POV information collected on all 15 books.
 	Array format: [['book_num', 'charcter_name', 'start', 'end']]
 	"""
+	# Chapter Names for Labels (Created my own abbreviations)
+	chapters = ["Prologue", "Eye of the World", "GreatHunt", "Dragon Reborn",
+	"ShadowRising", "Fires of Heaven", "Lord of Chaos", "A Crown of Swords",
+	"Path of Daggers", "Winter's Heart", "Crossroads of Twilight", "Knife of Dreams",
+	"The Gathering Storm", "Towers of Midnight"]
+
 	# Create Grid 100 x 200
 	grid = colors.reshape((100,200))
 
 	# Plotting
+	plt.rcdefaults()
+	plt.figure(num='wheeloftimeline')
 	plt.imshow(grid,interpolation='nearest',cmap=plt.cm.Greens)
-	plt.xticks([]), plt.yticks([])
-	plt.xlabel(''), plt.ylabel('')
-	plt.title('The Wheel of Time: Points of View')
+	# Labels, Title, Ticks, Etc.
+	plt.xticks([])
+	plt.yticks(np.arange(4, 100, 7), chapters)
+	plt.title('"The Wheel of Time" Points of View')
 	plt.show()
