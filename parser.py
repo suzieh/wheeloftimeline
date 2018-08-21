@@ -2,6 +2,7 @@
 # Author: Suzie Hoops (suzieh)
 # Last Updated: August 21, 2018
 # Usage: python parser.py
+#!/usr/bin/env python
 
 # Documentation
 

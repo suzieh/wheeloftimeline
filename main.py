@@ -2,6 +2,7 @@
 # Author: Suzie Hoops (suzieh)
 # Last Updated: August 21, 2018
 # Usage: pythonw main.py
+#!/usr/bin/env python
 
 ######## Install Dependencies ###################
 import parser
@@ -16,7 +17,7 @@ def main():
 	chars = [item[1] for item in arr]
 	colors_dict = gridplot.make_dict(chars)
 	colors = gridplot.prepare_data(arr,colors_dict)
-	
+
 	# Create Grid Plot
 	gridplot.plot(colors)
 	return 0

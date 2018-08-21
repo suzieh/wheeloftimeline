@@ -2,6 +2,7 @@
 # Author: Suzie Hoops (suzieh)
 # Last Updated: August 21, 2018
 # Usage: pythonw gridplot.py
+#!/usr/bin/env python
 
 ######## Install Dependencies ###################
 import matplotlib.pyplot as plt
