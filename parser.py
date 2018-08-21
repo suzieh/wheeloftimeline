@@ -123,11 +123,3 @@ def get_tables():
 		return out
 	# Raise an exception if we failed to get any data from the url
 	raise Exception('Error retrieving contents at {}'.format(url))
-
-
-######## Main Function ##########################
-arr = get_tables()
-chars = [item[1] for item in arr]
-col_dict = make_dict(chars)
-colors = prepare_data(arr,col_dict)
-plot(colors)
