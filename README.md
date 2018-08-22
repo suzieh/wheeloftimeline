@@ -77,7 +77,9 @@ The entire process is driven by the main.py script, which can be executed using 
 ```
 $ pythonw main.py
 ```
-A window should appear containing the plot. On the bottom frame, the characters are listed as you move your cursor over the graph. Additionally, you'll notice features in the lower left, including a zoom feature to zoom in on certain parts of the graph content.
+A window should appear containing the plot. On the bottom part of the frame, the characters are listed as you move your cursor over the graph. Additionally, you'll notice other features in the lower left, including a zoom feature to zoom in on selected sections of the graph.
+
+!(https://github.com/suzieh/wheeloftimeline/blob/master/screenshot.png)
 
 ## Versioning
 
