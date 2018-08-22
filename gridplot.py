@@ -34,7 +34,7 @@ def make_dict(char_list):
 	Create a dictionary of character names as keys and colors
 	as values for the visualization.
 	"""
-	# Restrict to unique character names (156 total)
+	# Restrict to unique character names (129 total)
 	char_list = sorted(set(char_list))
 	my_dict = {}
 	# Add characters to my_dict with corresponding values 0.1 - 12.9
@@ -84,25 +84,65 @@ def prepare_data(array, col_dict):
 
 
 ######## Create Visualization ###################
-def plot(colors):
+# Helper Array - List of Characters
+chars = ['', 'Adelorna Bastine', 'Alliandre Maritha Kigarin',
+	'Almen Bunt', 'Almurat Mor', 'Alteima', 'Alviarin Freidhen', 'Androl Genhald',
+	"Aran'gar", 'Arymilla Marne', 'Asmodean', 'Asne Zeramene', 'Assid Bakuun', 'Aviendha',
+	'Bain', 'Barmellin', 'Barriga', 'Bayle Domon', 'Beonin Marinye', 'Bertome Saighan',
+	'Bethamin Zeami', 'Birgitte Silverbow', 'Cadsuane Melaidhrin', 'Chulein', 'Cyndane',
+	'Dain Bornhald', 'Daved Hanlon', 'Davram Bashere', 'Delana Mosalaine', 'Demandred',
+	'Demira Eriff', 'Dyelin Taravin', 'Eamon Valda', 'Eben Hopwil', 'Egeanin Tamarath',
+	"Egwene al'Vere", "Elaida do Avriny a'Roihan", 'Elayne Trakand', 'Elenia Sarand',
+	'Ellorien Traemane', 'Elza Penfell', 'Ethenielle Cosaru Noramaga', 'Faile Bashere',
+	'Falendre', 'Falion Bhoda', 'Furyk Karede', 'Gabrelle', 'Galadedrid Damodred',
+	'Galina Casban', 'Gareth Bryne', 'Gawyn Trakand', 'Geofram Bornhald', 'Gholam',
+	'Graendal', 'Hadnan Kadere', 'Harine din Togara Two Winds', 'Jaichim Carridin',
+	'Jaret Byar', 'Jesse Bilal', 'Joline Maza', 'Katerine Alruddin', 'Kennar Miraj',
+	'Lan Mandragoran', 'Leane Sharif', 'Lelaine Akashi', 'Lews Therin Telamon', 'Liandrin',
+	'Loial', 'Luan Norwelyn', 'Maeric', 'Malenarin Rai', 'Masema Dagar', 'Matrim Cauthon',
+	'Merana Ambrey', 'Mesaana', 'Mili Skane', 'Min Farshaw', 'Moghedien', 'Moiraine Damodred',
+	'Morgase Trakand', 'Moridin', 'Myrelle Berengari', 'Narrator', 'Nesune Bihara',
+	'Noal Charin', "Nynaeve al'Meara", 'Olver', "Osan'gar", 'Padan Fain', 'Pedron Niall',
+	'Perrin Aybara', 'Pevara Tazanovni', 'Quote', 'Raefar Kisman', 'Rahvin', "Rand al'Thor",
+	'Reanne Corly', 'Renald Fanwar', 'Rhadam Asunawa', 'Rodel Ituralde', 'Romanda Cassin',
+	'Saerin Asnobar', 'Sahra Covenry', 'Samitsu', 'Sammael', 'Sarene Nemdahl', 'Seaine Herimon',
+	'Seanchan Rider', 'Semirhage', 'Sevanna', 'Shaidar Haran', 'Shalon din Togara Morning Tide',
+	'Sheriam Bayanar', 'Siuan Sanche', 'Slayer', 'Sorilea', 'Sulin', 'Suroth Sabelle Meldarath',
+	'Tarna Feir', 'Thomdril Merrilin', 'Timna', 'Toveine Gazal', 'Tuon Athaem Kore Paendrag',
+	'Tylee Khirgan', 'Varek', 'Verin Mathwin', 'Vilnar Barada', 'Weilin Aldragoran', 'Yukiri']
+
+# Helper Function - display character names
+class Formatter(object):
+	def __init__(self, im):
+		self.im = im
+	def __call__(self, x, y):
+		z = self.im.get_array()[int(y), int(x)] * 10
+		out = chars[int(z)]
+		return 'POV: {}'.format(out)
+
+# Function - Visualize Data in a new window and plot
+def plot(colors, chars):
 	"""
 	Using MatPlotLib, create a pop up window containing a plot
 	of POV information collected on all 15 books.
 	Array format: [['book_num', 'charcter_name', 'start', 'end']]
 	"""
 	# Chapter Names for Labels (Created my own abbreviations)
-	chapters = ["Prologue", "Eye of the World", "GreatHunt", "Dragon Reborn",
-	"ShadowRising", "Fires of Heaven", "Lord of Chaos", "A Crown of Swords",
+	chapters = ["Prologue", "Eye of the World", "Great Hunt", "Dragon Reborn",
+	"Shadow Rising", "Fires of Heaven", "Lord of Chaos", "A Crown of Swords",
 	"Path of Daggers", "Winter's Heart", "Crossroads of Twilight", "Knife of Dreams",
-	"The Gathering Storm", "Towers of Midnight"]
+	"Gathering Storm", "Towers of Midnight"]
 
 	# Create Grid 100 x 200
 	grid = colors.reshape((100,200))
 
 	# Plotting
-	plt.rcdefaults()
-	plt.figure(num='wheeloftimeline')
-	plt.imshow(grid,interpolation='nearest',cmap=plt.cm.Greens)
+	plt.rcdefaults() # start with defaults
+	fig = plt.figure(num='wheeloftimeline', figsize=(10.0,4.0)) # window title, window size
+	ax = fig.add_subplot(111)
+	im = ax.imshow(grid,interpolation='nearest',cmap=plt.cm.Greens)
+	# Reassign coordinates display to give character name
+	ax.format_coord = Formatter(im)
 	# Labels, Title, Ticks, Etc.
 	plt.xticks([])
 	plt.yticks(np.arange(4, 100, 7), chapters)

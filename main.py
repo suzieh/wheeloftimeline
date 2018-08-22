@@ -29,7 +29,8 @@ def main():
 	colors = gridplot.prepare_data(arr,colors_dict)
 
 	# Create Grid Plot
-	gridplot.plot(colors)
+	gridplot.plot(colors, chars)
+
 	return 0
 
 main()
