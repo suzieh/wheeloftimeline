@@ -51,6 +51,23 @@ $ cd path/to/directory
 $ git clone https://github.com/suzieh/wheeloftimeline.git
 ```
 
+## Virtual Environments
+
+I recommend activating a virtual environment prior to playing with this program. The venv module should already be installed with Python 3:
+
+```
+$ python3 -m venv venv
+$ . ./venv/bin/activate
+```
+
+To deactivate:
+
+```
+$ deactivate
+```
+
+The first line of creating the venv creates a directory for the virtual environment, so you will not need to repeat this line in future instances of activating an environment in this directory.
+
 ## Running the Program
 
 The program scraps data from the Wheel of Time Wiki page, and generates a plot mapping the changes in point of view within the books to a chart which appears in an independent window.
@@ -60,6 +77,7 @@ The entire process is driven by the main.py script, which can be executed using 
 ```
 $ pythonw main.py
 ```
+A window should appear containing the plot. On the bottom frame, the characters are listed as you move your cursor over the graph. Additionally, you'll notice features in the lower left, including a zoom feature to zoom in on certain parts of the graph content.
 
 ## Versioning
 
